@@ -8,9 +8,10 @@
 #include<utility>
 #include<string>
 #include<map>
-std::map<int,std::string> intToPermissions={{0,"---"},{1,"--x"},{2,"-w-"},{3,"-wx"},{4,"r--"},{5,"r-x"},{6,"rw-"},{7,"rwx"}};
-std::map<std::string,int> permissionsToString={{"---",0},{"--x",1},{"-w-",2},{"-wx",3},{"r--",4},{"r-x",5},{"rw-",6},{"rwx",7}};
+
 class ACL {
+    std::map<int,std::string> intToPermissions={{0,"---"},{1,"--x"},{2,"-w-"},{3,"-wx"},{4,"r--"},{5,"r-x"},{6,"rw-"},{7,"rwx"}};
+    std::map<std::string,int> permissionsToString={{"---",0},{"--x",1},{"-w-",2},{"-wx",3},{"r--",4},{"r-x",5},{"rw-",6},{"rwx",7}};
     std::string fileName;
     std::string Owner;
     std::string group;
@@ -21,4 +22,4 @@ class ACL {
 };
 
 
-#endif //SE_ASSIGNMENT_ACL_H
+#endif //ACL_H
