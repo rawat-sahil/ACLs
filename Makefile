@@ -1,7 +1,7 @@
 flags=-g
-depends=setacl_dependency.h getacl_dependency.h
-all: setacl
-
+depends=setacl_dependency.h ACL.h
+all: setacl getacl
+	touch testfile
 %.o: %.cpp $(depends)
 	g++  $(flags) -c -o $@ $<
 
@@ -9,9 +9,9 @@ setacl: setacl.o setacl_dependency.o ACL.o
 	g++ $(flags) -o $@ $^
 
 
-getacl: getacl.o getacl_dependency.o ACL.o
+getacl: getacl.o setacl_dependency.o ACL.o
 	g++ $(flags) -o $@ $^
 
 
 clean:
-	-rm *o setacl getacl
+	-rm *o setacl getacl testfile

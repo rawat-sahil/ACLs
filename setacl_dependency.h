@@ -11,10 +11,12 @@
 #include<error.h>
 #include<sys/stat.h>
 #include<sys/types.h>
-#include <string.h>
+#include<sys/xattr.h>
+#include<string.h>
 
+#define xattrName "user.acl"
 void initialise(std::string fileName);
-bool isInitialised(std::string fileName);
+void isInitialised(std::string fileName);
 
 
 #endif //SETACL_DEPENDENCY_H

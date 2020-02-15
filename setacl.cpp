@@ -43,10 +43,16 @@ int main(int argc,char * argv[]) {
             std::cout << "only owner of the file or root can change acl" << std::endl;
             exit(-1);
         }
-    } else {
+    }
+    else {
         std::cout << "file name is required" << std::endl;
         exit(-1);
     }
+
+//    check if the file is initialised for acls
+    isInitialised(fileName);
+
+
 //if entries are to extended in the acl
     if (extend) {
         for (auto i:extendEntry) {
