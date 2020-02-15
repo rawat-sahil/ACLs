@@ -17,7 +17,7 @@
 #include <libgen.h>
 
 class ACL {
-private:
+public:
     std::map<int,std::string> intToPermissions={
         {0,"---"},
         {1,"--x"},
@@ -44,7 +44,9 @@ private:
     int others;
     int mask;
 public:
+    ACL();
     ACL(std::string fileName);
+    void printACL();
 
 };
 

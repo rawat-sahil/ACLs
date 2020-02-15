@@ -3,7 +3,9 @@
 //
 #include"setacl_dependency.h"
 void isInitialised(std::string fileName){
-  if(getxattr(fileName.c_str(),xattrName,NULL,0)==-1)initialise(fileName);
+  if(getxattr(fileName.c_str(),xattrName,NULL,0)==-1){
+    initialise(fileName);
+  }
 }
 
 void initialise(std::string fileName){

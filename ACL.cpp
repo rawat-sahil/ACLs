@@ -3,6 +3,10 @@
 //
 
 #include "ACL.h"
+
+ACL::ACL() {
+}
+
 ACL::ACL(std::string fileName){
 //  setting file name
   FileName=std::string(basename(strdup(fileName.c_str())));
@@ -34,3 +38,21 @@ ACL::ACL(std::string fileName){
 
 }
 
+void ACL::printACL() {
+  using namespace std;
+//  print filename owner and group
+  cout<<"# file: "<<FileName<<endl;
+  cout<<"# owner: "<<Owner<<endl;
+  cout<<"# group: "<<group<<endl;
+
+//  print permission associated with all the users
+  for(auto i:user){
+    cout<<"user:"<<i.first<<":"<<intToPermissions[i.second]<<endl;
+  }
+//  print permissions associated with all the groups
+  for(auto i:groups){
+    cout<<"group:"<<i.first<<":"<<intToPermissions[i.second]<<endl;
+  }
+  cout<<"other::"<<intToPermissions[others]<<endl;
+  cout<<"mask::"<<intToPermissions[mask]<<endl;
+}
