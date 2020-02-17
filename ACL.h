@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <libgen.h>
+#include<sys/types.h>
+#include<sys/xattr.h>
 
 class ACL {
 public:
@@ -47,6 +49,8 @@ public:
     ACL();
     ACL(std::string fileName);
     void printACL();
+    std::string serialise();
+    void deserialise(std::string attrList);
 
 };
 

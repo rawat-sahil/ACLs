@@ -3,8 +3,8 @@
 //
 
 #include "ACL.h"
-
 ACL::ACL() {
+
 }
 
 ACL::ACL(std::string fileName){
@@ -55,4 +55,71 @@ void ACL::printACL() {
   }
   cout<<"other::"<<intToPermissions[others]<<endl;
   cout<<"mask::"<<intToPermissions[mask]<<endl;
+}
+
+std::string ACL::serialise(){
+  std::string serialisedString="";
+  char buff[256];
+  sprintf(buff,"%s\n",FileName.c_str());
+  serialisedString.append(buff);
+
+  sprintf(buff,"%s\n",Owner.c_str());
+  serialisedString.append(buff);
+
+  sprintf(buff,"%s\n",group.c_str());
+  serialisedString.append(buff);
+
+  for(auto i:user){
+    sprintf(buff,"u%s%d\n",i.first.c_str(),i.second);
+    serialisedString.append(buff);
+  }
+  for(auto i:groups){
+    sprintf(buff,"g%s%d\n",i.first.c_str(),i.second);
+    serialisedString.append(buff);
+  }
+  sprintf(buff,"o%d\n",others);
+  serialisedString.append(buff);
+
+  sprintf(buff,"m%d\n",mask);
+  serialisedString.append(buff);
+
+  return serialisedString;
+}
+
+void ACL::deserialise(std::string attrList) {
+    const char * tempAttrList=attrList.c_str();
+    std::vector<std::string> stringList;
+
+    char * token=strtok((char *)tempAttrList,"\n");
+
+    while(token!=NULL){
+        stringList.push_back(std::string(token));
+        token=strtok(NULL,"\n");
+    }
+
+    FileName=stringList[0];
+    Owner=stringList[1];
+    group=stringList[2];
+
+    for(int i=3;i<stringList.size();++i){
+        if(stringList[i][0]=='u'){
+            int permission=stringList[i][stringList[i].size()-1]-'0';
+            std::string user=stringList[i].substr(1,stringList[i].size()-2);
+            this->user.push_back(std::make_pair(user,permission));
+        }
+        else if(stringList[i][0]=='g'){
+            int permission=stringList[i][stringList[i].size()-1]-'0';
+            std::string group=stringList[i].substr(1,stringList[i].size()-2);
+            groups.push_back(std::make_pair(group,permission));
+        }
+        else if(stringList[i][0]=='o'){
+            others=stringList[i][1]-'0';
+        }
+        else if(stringList[i][0]=='m'){
+            mask=stringList[i][1]-'0';
+        }
+
+    }
+
+
 }

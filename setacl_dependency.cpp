@@ -10,5 +10,7 @@ void isInitialised(std::string fileName){
 
 void initialise(std::string fileName){
   ACL acl(fileName);
-  setxattr(fileName.c_str(),xattrName,&acl, sizeof(acl),XATTR_CREATE);
+  std::string temp=acl.serialise();
+  std::cout<<temp<<std::endl;
+  setxattr(fileName.c_str(),xattrName,temp.c_str(), strlen(temp.c_str()),XATTR_CREATE);
 }
