@@ -49,9 +49,12 @@ public:
     ACL();
     ACL(std::string fileName);
     void printACL();
-    std::string serialise();
-    void deserialise(std::string attrList);
-
+    std::string serialise();//convert all the data of the class into string
+    void deserialise(std::string attrList);//convert all the data from file to class
+    void check(std::string filename);//if the owner or group is changed then this function update that
+    void update(std::string entry);//take entry as input and update the entries of the class
+    void deleteEntry(std::string entry);//take entry as input and delete a particular entry
+    void removeAll();//remove all the entries from the class
 };
 
 

@@ -17,6 +17,10 @@
 #define xattrName "user.acl"
 void initialise(std::string fileName);
 void isInitialised(std::string fileName);
+void extendACL(std::string filename,std::string entry);
+void removeAclEntry(std::string filename,std::string entry);
+void removeAllEntries(std::string filename);
+ACL getACLEntries(std::string filename);
 
 
 #endif //SETACL_DEPENDENCY_H

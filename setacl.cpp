@@ -54,22 +54,22 @@ int main(int argc,char * argv[]) {
 
 
 //if entries are to extended in the acl
-    if (extend) {
+    if (extend) {//option argument m
         for (auto i:extendEntry) {
-            std::cout << i << std::endl;
+            extendACL(fileName,i);
         }
     }
 
 // if a particular entry is to be removed from the acl
     if (remove) {
-        for (auto i: removeEntry) {
-            std::cout << i << std::endl;
+        for (auto i: removeEntry) {//option argument x
+            removeAclEntry(fileName,i);
         }
     }
 
 // if all the extended entries to be removed from the acl
-    if (removeAll) {
-        std::cout << "removeall\n";
+    if (removeAll) {//option argument b
+        removeAllEntries(fileName);
     }
 
 }
